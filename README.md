@@ -1,3 +1,11 @@
+### APK İndirme Linki
+
+```bash
+https://konusarakogren.oguzhanbalta.com/
+```
+
+
+
 
 ### Uygulama Tanıtımı
 
