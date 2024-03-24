@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import EpisodesScreen from '../screens/EpisodesScreen';
 import EpisodeDetailsScreen from '../screens/EpisodeDetailsScreen';
 import CharacterDetailsScreen from "../screens/CharacterDetailsScreen";
+import FavoriteCharacters from "../screens/FavoriteCharacters";
 
 export type RootStackParamList = {
     Home: undefined;
@@ -49,6 +50,13 @@ const AppNavigator: React.FC = () => {
                 component={CharacterDetailsScreen}
                 options={{
                     title: 'Character Details',
+                }}
+            />
+            <Stack.Screen
+                name="FavoriteCharacters"
+                component={FavoriteCharacters}
+                options={{
+                    title: 'Favorite Characters',
                 }}
             />
         </Stack.Navigator>
