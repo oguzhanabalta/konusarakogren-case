@@ -15,12 +15,12 @@ const CharacterDetailsScreen = ({ route, navigation }: { route: any }) => {
 	const handleAddFavorite = () => {
 		if (favorites.length >= 10) {
 			// Local Notification göster
-			Alert.alert('Favorilerinizde en fazla 10 karakter olabilir!', 'Daha fazla karakter eklemek için favorilerinizden karakter çıkarmanız gerekmektedir.');
+			Alert.alert('You can have up to 10 characters in your favorites!', 'To add more characters, you need to remove characters from your favorites.');
 		} else {
 			//eğer aynı karakter favorilere eklenmeye çalışılırsa uyarı ver
 			const isCharacterExist = favorites.find((item: Character) => item.id === characterDetails?.id);
 			if (isCharacterExist) {
-				Alert.alert('Bu karakter zaten favorilerinizde bulunmaktadır!', 'Aynı karakteri tekrar favorilere ekleyemezsiniz.');
+				Alert.alert('This character is already in your favorites!', 'You cannot add the same character to favorites again.');
 				return;
 			}
 
@@ -71,8 +71,8 @@ const CharacterDetailsScreen = ({ route, navigation }: { route: any }) => {
 					<Text style={styles.detail}>Gender: {characterDetails.gender}</Text>
 					<Text style={styles.detail}>Origin: {characterDetails.origin.name}</Text>
 					<Text style={styles.detail}>Last Known Location: {characterDetails.location.name}</Text>
-					<CustomButton title="Favorilere Ekle" onPress={handleAddFavorite} />
-					<CustomButton title="Favoriler" onPress={() => {
+					<CustomButton title="Add Favorite" onPress={handleAddFavorite} />
+					<CustomButton title="Favorites" onPress={() => {
 						navigation.navigate('FavoriteCharacters');
 					}} />
 

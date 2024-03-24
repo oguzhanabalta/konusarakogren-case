@@ -11,11 +11,11 @@ const FavoriteCharacters: React.FC = () => {
 
 	const handleRemoveFavorite = (character: Character) => {
 		Alert.alert(
-			'Favori Karakteri Kaldır',
-			`${character.name} isimli karakteri favorilerden kaldırmak istediğinize emin misiniz?`,
+			'Remove from favorites',
+			`Are you sure you want to remove ${character.name} from your favorites?`,
 			[
-				{ text: 'Hayır' },
-				{ text: 'Evet', onPress: () => dispatch(removeFavorite(character.id)) },
+				{ text: 'No' },
+				{ text: 'Yes', onPress: () => dispatch(removeFavorite(character.id)) },
 			],
 		);
 	};
@@ -30,7 +30,7 @@ const FavoriteCharacters: React.FC = () => {
 				style={styles.removeButton}
 				onPress={() => handleRemoveFavorite(item)}
 			>
-				<Text style={styles.removeButtonText}>Sil</Text>
+				<Text style={styles.removeButtonText}>Delete</Text>
 			</TouchableOpacity>
 		</View>
 	);
@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		padding: 10,
+		backgroundColor: '#333',
 	},
 	characterWrapper:{
 		flexDirection: 'row',
@@ -72,14 +73,14 @@ const styles = StyleSheet.create({
 	removeButton: {
 		padding: 10,
 		backgroundColor: '#f4511e',
-		width: 60,
+		width: "auto",
 		alignItems: 'center',
 		borderRadius: 30,
 
 	},
 	removeButtonText: {
 		color: '#fff',
-		fontSize: 16,
+		fontSize: 12,
 	},
 });
 

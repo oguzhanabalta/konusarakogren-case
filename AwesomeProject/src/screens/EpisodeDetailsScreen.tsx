@@ -64,9 +64,11 @@ const EpisodeDetailsScreen = ({ route, navigation }: { route: any }) => {
   return (
       <SafeAreaView style={styles.container}>
         <View style={styles.detailsContainer}>
-          <Text style={styles.title}>{episodeDetails?.name}</Text>
-          <Text style={styles.detailText}>Air date: {episodeDetails?.air_date}</Text>
-          <Text style={styles.detailText}>Episode: {episodeDetails?.episode}</Text>
+          <View style={styles.detailWrapper}>
+            <Text style={styles.title}>{episodeDetails?.name}</Text>
+            <Text style={styles.detailText}>Air date: {episodeDetails?.air_date}</Text>
+            <Text style={styles.detailText}>Episode: {episodeDetails?.episode}</Text>
+          </View>
 
           {/* Karakterler listesi */}
           <View style={styles.characterListContainer}>
@@ -88,6 +90,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#f5f5f5',
     margin: 10,
+  },
+  detailWrapper: {
+    backgroundColor: '#fff',
+    padding: 20,
+    borderRadius: 8,
   },
   detailsContainer: {
     padding: 20,

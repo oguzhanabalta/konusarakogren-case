@@ -4,6 +4,8 @@ import EpisodesScreen from '../screens/EpisodesScreen';
 import EpisodeDetailsScreen from '../screens/EpisodeDetailsScreen';
 import CharacterDetailsScreen from "../screens/CharacterDetailsScreen";
 import FavoriteCharacters from "../screens/FavoriteCharacters";
+import {Alert, Button} from "react-native";
+import HomeScreen from "../screens/HomeScreen";
 
 export type RootStackParamList = {
     Home: undefined;
@@ -33,6 +35,21 @@ const AppNavigator: React.FC = () => {
         >
             <Stack.Screen
                 name="Home"
+                component={HomeScreen}
+                options={({ navigation }) => ({
+                    title: 'Home',
+                    headerRight: () => (
+                        <Button
+                            title="Search"
+                            onPress={() => Alert.alert('Search button clicked!')}
+                            // React Native'deki Button bileşeni "style" prop'unu desteklemez.
+                            // Eğer özel bir stil uygulamak isterseniz, TouchableOpacity veya TouchableHighlight gibi bileşenleri kullanabilirsiniz.
+                        />
+                    ),
+                })}
+            />
+            <Stack.Screen
+                name="Episodes"
                 component={EpisodesScreen}
                 options={{
                     title: 'Episodes',
