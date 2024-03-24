@@ -1,79 +1,52 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+Mobil uygulamanızın dökümantasyonunu hazırlarken, uygulamanın genel yapısını, nasıl çalıştığını, kullanılan teknolojileri ve önemli bileşenleri açıklayan bir yapı izlemek faydalı olacaktır. İşte temel başlıklar altında bir dökümantasyon örneği:
 
-# Getting Started
+### Uygulama Tanıtımı
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+Bu mobil uygulama, kullanıcılara "Rick and Morty" evrenindeki bölümleri ve karakterleri keşfetme olanağı sunar. Kullanıcılar, bölüm detaylarına, karakter bilgilerine erişebilir ve favori karakterlerini kaydedebilirler.
 
-## Step 1: Start the Metro Server
+### Kullanılan Teknolojiler
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+- **React Native:** Uygulama, iOS ve Android platformlarında çalışacak şekilde React Native kullanılarak geliştirilmiştir.
+- **Redux Toolkit:** Uygulama durum yönetimi için Redux Toolkit kullanılmıştır.
+- **React Navigation:** Sayfa geçişleri ve navigasyon için React Navigation kütüphanesi tercih edilmiştir.
+- **Axios:** API istekleri için Axios HTTP istemcisi kullanılmıştır.
+- **AsyncStorage:** Kalıcı veri saklama işlemleri için React Native AsyncStorage kullanılmıştır.
 
-To start Metro, run the following command from the _root_ of your React Native project:
+### Uygulama Yapısı
 
-```bash
-# using npm
-npm start
+Uygulama, aşağıdaki ana ekranlardan oluşmaktadır:
 
-# OR using Yarn
-yarn start
-```
+- **HomeScreen:** Uygulamanın ana sayfasıdır. Kullanıcı bu ekrandan diğer ekranlara geçiş yapabilir.
+- **EpisodesScreen:** "Rick and Morty" bölümlerinin listelendiği ekrandır. Kullanıcılar bölüm adlarına tıklayarak detay sayfalarına gidebilirler.
+- **EpisodeDetailsScreen:** Seçilen bölümün detaylarının gösterildiği sayfadır. Bölüm hakkında genel bilgiler ve bölümde yer alan karakterler listelenir.
+- **CharacterDetailsScreen:** Seçilen karakterin detaylarının gösterildiği ekrandır. Karakter hakkında ayrıntılı bilgi verilir.
+- **FavoriteCharacters:** Kullanıcının favori karakterlerinin listelendiği ekrandır. Kullanıcılar buradan karakterleri favorilerden çıkarabilirler.
 
-## Step 2: Start your Application
+### Özellikler
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+- **Arama Fonksiyonu:** Kullanıcılar, bölümler ve karakterler üzerinde arama yapabilirler. Arama, API üzerinden gerçekleştirilir ve sonuçlar dinamik olarak listelenir.
+- **Favori Karakterler:** Kullanıcılar, beğendikleri karakterleri favorilere ekleyebilir ve bu listeyi yönetebilirler. Favori listesi maksimum 10 karakter ile sınırlıdır.
 
-### For Android
+### Kurulum ve Çalıştırma
 
-```bash
-# using npm
-npm run android
-
-# OR using Yarn
-yarn android
-```
-
-### For iOS
+Uygulamayı geliştirme ortamınızda kurulum ve çalıştırma adımları için:
 
 ```bash
-# using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
+git clone <repo-url>
+cd <uygulama-dizini>
+npm install
+npx react-native run-android # Android için
+npx react-native run-ios # iOS için
 ```
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+### Yapılandırma ve Ayarlar
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+Uygulama, `.env` dosyası kullanılarak yapılandırılabilir. Bu dosyada API bağlantı adresleri gibi önemli ayarlar saklanır.
 
-## Step 3: Modifying your App
+### Lisans ve Katkıda Bulunma
 
-Now that you have successfully run the app, let's modify it.
+Uygulama [MIT lisansı](https://opensource.org/licenses/MIT) altında yayımlanmıştır. Katkıda bulunmak isteyenler, proje deposundaki `CONTRIBUTING.md` dosyasına bakabilirler.
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+---
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+Bu dökümantasyon, uygulamanızın genel yapısını ve işleyişini özetler. Uygulamanızın spesifik ihtiyaçlarına göre dökümantasyonu genişletebilir ve detaylandırabilirsiniz.
