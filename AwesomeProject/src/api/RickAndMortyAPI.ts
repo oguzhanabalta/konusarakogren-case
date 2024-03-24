@@ -37,3 +37,5 @@ export const fetchCharacterDetails = async (characterId: string): Promise<Charac
 		throw new Error('Error fetching character details');
 	}
 };
+
+

@@ -2,9 +2,20 @@ import React, { useState, useEffect } from 'react';
 import {View, FlatList, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import { fetchEpisodes } from '../api/RickAndMortyAPI';
 import { Episode } from '../types/episode';
+import SearchBar from "./SearchBar";
 
 const EpisodeList = ({navigation, page}) => {
+	const [searchQuery, setSearchQuery] = useState('');
+	const [filteredEpisodes, setFilteredEpisodes] = useState<Episode[]>([]);
 	const [episodes, setEpisodes] = useState<Episode[]>([]);
+
+	useEffect(() => {
+		// Arama terimine göre filtreleme yap
+		const filtered = episodes.filter((episode: Episode) =>
+			episode.name.toLowerCase().includes(searchQuery.toLowerCase()),
+		);
+		setFilteredEpisodes(filtered);
+	}, [searchQuery, episodes]);
 
 	useEffect(() => {
 		const fetchAndSetEpisodes = async () => {
@@ -28,8 +39,9 @@ const EpisodeList = ({navigation, page}) => {
 
 	return (
 		<View style={styles.container}>
+			<SearchBar onSearch={setSearchQuery} />
 			<FlatList
-				data={episodes}
+				data={filteredEpisodes}
 				renderItem={renderItem}
 				keyExtractor={(item) => item.id.toString()}
 			/>
@@ -40,6 +52,7 @@ const EpisodeList = ({navigation, page}) => {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
+		width: '100%',
 		padding: 10,
 		backgroundColor: '#333333',
 	},
@@ -48,14 +61,7 @@ const styles = StyleSheet.create({
 		borderRadius: 8, // Kartın kenar yuvarlaklığı
 		padding: 15, // İç padding
 		marginBottom: 10, // Kartlar arası mesafe
-		shadowColor: '#000', // Gölge rengi
-		shadowOffset: {
-			width: 0,
-			height: 2,
-		},
-		shadowOpacity: 0.25,
-		shadowRadius: 3.84,
-		elevation: 5,
+
 	},
 	title: {
 		fontSize: 18, // Başlık font boyutu

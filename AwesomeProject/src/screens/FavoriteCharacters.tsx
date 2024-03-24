@@ -3,11 +3,22 @@ import {View, Text, FlatList, StyleSheet, TouchableOpacity, Alert, Image} from '
 import { useSelector, useDispatch } from 'react-redux';
 import {addFavorite, removeFavorite} from '../redux/favoritesSlice';
 import {Character} from "../types/character";
+import SearchBar from "../components/SearchBar";
 
 
 const FavoriteCharacters: React.FC = () => {
 	const dispatch = useDispatch();
+	const [searchQuery, setSearchQuery] = useState('');
 	const favorites = useSelector(state => state.favorites.characters);
+	const [filteredFavorites, setFilteredFavorites] = useState<Character[]>([]);
+
+	useEffect(() => {
+		const filtered = favorites.filter((character: Character) =>
+			character.name.toLowerCase().includes(searchQuery.toLowerCase()),
+		);
+		setFilteredFavorites(filtered);
+
+	}, [favorites, searchQuery]);
 
 	const handleRemoveFavorite = (character: Character) => {
 		Alert.alert(
@@ -37,8 +48,9 @@ const FavoriteCharacters: React.FC = () => {
 
 	return (
 		<View style={styles.container}>
+			<SearchBar onSearch={setSearchQuery} />
 			<FlatList
-				data={favorites}
+				data={filteredFavorites}
 				keyExtractor={(item) => item?.name?.toString()}
 				renderItem={renderItem}
 			/>

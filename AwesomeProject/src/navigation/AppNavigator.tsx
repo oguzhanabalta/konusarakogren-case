@@ -4,13 +4,15 @@ import EpisodesScreen from '../screens/EpisodesScreen';
 import EpisodeDetailsScreen from '../screens/EpisodeDetailsScreen';
 import CharacterDetailsScreen from "../screens/CharacterDetailsScreen";
 import FavoriteCharacters from "../screens/FavoriteCharacters";
-import {Alert, Button} from "react-native";
 import HomeScreen from "../screens/HomeScreen";
+import {TouchableOpacity, Text, StyleSheet} from "react-native";
 
 export type RootStackParamList = {
     Home: undefined;
-    EpisodeDetails: undefined; // Bu parametre ismi daha tanımlayıcı olacak şekilde güncellendi.
+    Episodes: undefined;
+    EpisodeDetails: undefined;
     CharacterDetail: undefined;
+    FavoriteCharacters: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -27,57 +29,59 @@ const commonHeaderTitleStyle = {
 const AppNavigator: React.FC = () => {
     return (
         <Stack.Navigator
-            screenOptions={{
+            screenOptions={({ navigation }) => ({
                 headerStyle: commonHeaderStyle,
                 headerTintColor: '#fff',
                 headerTitleStyle: commonHeaderTitleStyle,
-            }}
+                headerRight: () => (
+                    <TouchableOpacity
+                        style={styles.headerButton}
+                        onPress={() => navigation.navigate('FavoriteCharacters')}
+                    >
+                        <Text style={styles.headerButtonText}>Favorites</Text>
+                    </TouchableOpacity>
+                ),
+            })}
         >
             <Stack.Screen
                 name="Home"
                 component={HomeScreen}
-                options={({ navigation }) => ({
-                    title: 'Home',
-                    headerRight: () => (
-                        <Button
-                            title="Search"
-                            onPress={() => Alert.alert('Search button clicked!')}
-                            // React Native'deki Button bileşeni "style" prop'unu desteklemez.
-                            // Eğer özel bir stil uygulamak isterseniz, TouchableOpacity veya TouchableHighlight gibi bileşenleri kullanabilirsiniz.
-                        />
-                    ),
-                })}
+                options={{ title: 'Home' }}
             />
             <Stack.Screen
                 name="Episodes"
                 component={EpisodesScreen}
-                options={{
-                    title: 'Episodes',
-                }}
+                options={{ title: 'Episodes' }}
             />
             <Stack.Screen
-                name="EpisodeDetails" // Bu ismi de daha açıklayıcı olacak şekilde güncelledim.
+                name="EpisodeDetails"
                 component={EpisodeDetailsScreen}
-                options={{
-                    title: 'Episode Details',
-                }}
+                options={{ title: 'Episode Details' }}
             />
             <Stack.Screen
                 name="CharacterDetail"
                 component={CharacterDetailsScreen}
-                options={{
-                    title: 'Character Details',
-                }}
+                options={{ title: 'Character Details' }}
             />
             <Stack.Screen
                 name="FavoriteCharacters"
                 component={FavoriteCharacters}
-                options={{
-                    title: 'Favorite Characters',
-                }}
+                options={{ title: 'Favorite Characters' }}
             />
         </Stack.Navigator>
     );
 };
+
+const styles = StyleSheet.create({
+    headerButton: {
+        marginRight: 10,
+        backgroundColor: '#333',
+        padding: 10,
+        borderRadius: 5,
+    },
+    headerButtonText: {
+        color: '#fff',
+    },
+});
 
 export default AppNavigator;

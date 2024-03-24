@@ -13,13 +13,24 @@ import {
 import {fetchCharacterDetails, fetchEpisodeDetails} from '../api/RickAndMortyAPI';
 import { Episode } from '../types/episode';
 import {Character} from "../types/character";
+import SearchBar from "../components/SearchBar";
 
 // Bu componentin props olarak bir bölüm ID'si alması beklenir
 // Örneğin, React Navigation kullanıyorsanız, bu ID route.params üzerinden gelebilir
 const EpisodeDetailsScreen = ({ route, navigation }: { route: any }) => {
   const [episodeDetails, setEpisodeDetails] = useState<Episode | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
   const [characters, setCharacters] = useState<Character[]>([]);
+  const [filteredCharacters, setFilteredCharacters] = useState<Character[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    // Arama terimine göre filtreleme yap
+    const filtered = characters.filter((character: Character) =>
+        character.name.toLowerCase().includes(searchQuery.toLowerCase()),
+    );
+    setFilteredCharacters(filtered);
+  }, [searchQuery, characters]);
 
   useEffect(() => {
     const fetchDetailsAndCharacters = async () => {
@@ -73,8 +84,9 @@ const EpisodeDetailsScreen = ({ route, navigation }: { route: any }) => {
           {/* Karakterler listesi */}
           <View style={styles.characterListContainer}>
             <Text style={styles.subtitle}>Characters:</Text>
+            <SearchBar onSearch={setSearchQuery} />
             <FlatList
-                data={characters}
+                data={filteredCharacters}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={renderCharacter}
             />
@@ -95,6 +107,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     padding: 20,
     borderRadius: 8,
+    borderColor:'#f4511e',
+    borderWidth:2,
   },
   detailsContainer: {
     padding: 20,
